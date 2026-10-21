@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="LibReg, aplikasi pendaftaran anggota perpustakaan untuk tugas Pemrograman Web.">
+  <meta name="description" content="Kelola data anggota perpustakaan di LibReg. Cari anggota, perbarui informasi, dan cetak kartu keanggotaan.">
   <title>Data Anggota - LibReg</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
@@ -21,15 +21,13 @@
       <div class="member-heading"><div><h1 class="page-title">Data Anggota</h1><p>Kelola data anggota perpustakaan.</p></div><a class="btn btn-primary" href="pendaftaran.html"><span data-icon="plus"></span> Tambah Anggota</a></div>
       <div class="member-counts visually-hidden"><span>Total: <strong id="stat-total">0</strong></span><span>Mahasiswa: <strong id="stat-student">0</strong></span><span>Dosen: <strong id="stat-lecturer">0</strong></span><span>Tenaga kependidikan: <strong id="stat-staff">0</strong></span></div>
       <div class="alert alert-danger" id="storage-error" role="alert" hidden></div>
-      <div class="alert alert-info py-2 small" id="demo-banner" hidden>Daftar memuat data contoh fiktif untuk latihan.</div>
       <section aria-label="Daftar anggota">
         <div class="table-toolbar"><div class="search-field"><span data-icon="search"></span><label class="visually-hidden" for="member-search">Cari nama atau NIM/NIP</label><input class="form-control" id="member-search" type="search" placeholder="Cari nama, NIM/NIP, atau program studi..."></div><label class="visually-hidden" for="type-filter">Jenis anggota</label><select class="form-select" id="type-filter"><option value="">Semua Jenis</option><option>Mahasiswa</option><option>Dosen</option><option>Tenaga Kependidikan</option></select><label class="visually-hidden" for="program-filter">Program studi</label><select class="form-select" id="program-filter"><option value="">Semua Program Studi</option></select></div>
         <div class="table-responsive" tabindex="0" role="region" aria-label="Tabel anggota, geser ke samping pada layar kecil"><table class="table member-table"><caption class="visually-hidden">Data anggota perpustakaan</caption><thead><tr><th scope="col">No</th><th scope="col">Nama Lengkap</th><th scope="col">NIM/NIP</th><th scope="col">Program Studi</th><th scope="col">Jenis</th><th scope="col">No. Telepon</th><th scope="col">Email</th><th scope="col">Aksi</th></tr></thead><tbody id="table-body"></tbody></table></div>
-        <div class="empty-state" id="empty-state"><h2 class="h5" id="empty-title">Belum ada anggota</h2><p id="empty-description">Tambahkan anggota untuk mulai mencoba.</p></div>
+        <div class="empty-state" id="empty-state"><h2 class="h5" id="empty-title">Belum ada anggota</h2><p id="empty-description">Tambahkan anggota melalui formulir pendaftaran.</p></div>
         <div class="pagination-bar"><span id="result-count" role="status" aria-live="polite"></span><div class="pagination-right"><label class="visually-hidden" for="sort-filter">Urutan anggota</label><select id="sort-filter" class="form-select sort-select"><option value="newest">Terbaru</option><option value="name">Nama A-Z</option></select><nav class="pagination-controls" id="page-controls" aria-label="Halaman daftar anggota"></nav></div></div>
       </section>
-      <button class="btn btn-outline-secondary btn-sm mt-3" id="demo-button">Muat data contoh</button>
-      <p class="storage-note">Data tersimpan di browser ini menggunakan localStorage.</p>
+      <p class="storage-note">Data anggota tersedia di browser ini.</p>
     </main></div>
   </div>
   <div class="modal fade" id="detail-modal" tabindex="-1" aria-labelledby="detail-title" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h2 class="modal-title" id="detail-title">Detail anggota</h2><button class="btn-close" data-bs-dismiss="modal" aria-label="Tutup detail"></button></div><div class="modal-body" id="detail-content"></div><div class="modal-footer"><button class="btn btn-light" data-bs-dismiss="modal">Tutup</button><button class="btn btn-primary" id="detail-print"><span data-icon="printer"></span> Cetak kartu</button></div></div></div></div>

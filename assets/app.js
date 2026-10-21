@@ -32,7 +32,7 @@
   const nav = $('#site-header');
   if (nav && page !== 'members') nav.innerHTML = `<nav class="navbar navbar-expand-lg site-navbar" aria-label="Navigasi utama"><div class="container"><a class="navbar-brand d-flex align-items-center gap-2" href="index.html" aria-label="LibReg, beranda">${brand}</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Buka menu navigasi"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="main-nav"><ul class="navbar-nav ms-auto">${navItems.map(([url,label,key])=>`<li class="nav-item"><a class="nav-link ${page===key?'active':''}" ${page===key?'aria-current="page"':''} href="${url}">${label}</a></li>`).join('')}</ul>${page==='members'?'<button class="btn btn-outline-primary btn-sm ms-lg-3" id="logout">Keluar</button>':'<a href="login.html" class="btn btn-primary btn-sm ms-lg-3">Login</a>'}</div></div></nav>`;
   const footer = $('#site-footer');
-  if (footer && page !== 'members') footer.innerHTML = `<footer class="site-footer"><div class="container"><div class="row g-3"><div class="col-md-4"><h2 class="h5 footer-brand">LibReg</h2><p>Pendaftaran anggota perpustakaan yang lebih mudah.<br>Proyek Pemrograman Web.</p></div><div class="col-md-4"><h2 class="h6">Kontak</h2><p>Gedung Perpustakaan, Kampus Utama<br>perpustakaan@universitas.example<br>(021) 555 0123</p></div><div class="col-md-4"><h2 class="h6">Jam layanan</h2><p>Senin-Jumat: 08.00-16.00 WIB<br>Sabtu, Minggu, dan hari libur: tutup.</p></div></div><div class="footer-note">© ${new Date().getFullYear()} LibReg. Profil dan kontak merupakan contoh untuk tugas.</div></div></footer>`;
+  if (footer && page !== 'members') footer.innerHTML = `<footer class="site-footer"><div class="container"><div class="row g-3"><div class="col-md-4"><h2 class="h5 footer-brand">LibReg</h2><p>Pendaftaran anggota perpustakaan yang lebih mudah.</p></div><div class="col-md-4"><h2 class="h6">Kontak</h2><p>Gedung Perpustakaan, Kampus Utama<br>perpustakaan@universitas.example<br>(021) 555 0123</p></div><div class="col-md-4"><h2 class="h6">Jam layanan</h2><p>Senin-Jumat: 08.00-16.00 WIB<br>Sabtu, Minggu, dan hari libur: tutup.</p></div></div><div class="footer-note">© ${new Date().getFullYear()} LibReg. Hak cipta dilindungi.</div></div></footer>`;
   $$('[data-icon]').forEach(el => el.innerHTML = icon(el.dataset.icon));
   const toastHost = document.createElement('div');
   toastHost.className = 'toast-container position-fixed bottom-0 end-0 p-3';
@@ -119,12 +119,12 @@
     return Object.fromEntries(['name','number','program','address','phone','email','type'].map(k=>[k,k==='number'?normalizeNumber(data[k]):String(data[k]||'').trim()]));
   }
   function cardMarkup(m) {
-    return `<div class="member-card"><div class="card-brand"><span>${icon('book')} LibReg.</span><span>KARTU ANGGOTA DEMO</span></div><div class="card-name wrap-anywhere">${escape(m.name)}</div><div class="card-id">${escape(m.number)} · ${escape(m.type)}</div><div class="card-bottom"><span>${escape(memberNumber(m))}</span><span>${escape(m.program)}</span></div></div>`;
+    return `<div class="member-card"><div class="card-brand"><span>${icon('book')} LibReg.</span><span>KARTU ANGGOTA</span></div><div class="card-name wrap-anywhere">${escape(m.name)}</div><div class="card-id">${escape(m.number)} · ${escape(m.type)}</div><div class="card-bottom"><span>${escape(memberNumber(m))}</span><span>${escape(m.program)}</span></div></div>`;
   }
   function printCard(m) {
     $('#print-area')?.remove();
     const area = document.createElement('div'); area.id='print-area'; area.hidden=true;
-    area.innerHTML = `${cardMarkup(m)}<p>Kartu simulasi untuk proyek pembelajaran. Bukan kartu resmi perpustakaan.<br>Terdaftar ${escape(dateLabel(m.createdAt))}.</p>`;
+    area.innerHTML = `${cardMarkup(m)}<p>Terdaftar ${escape(dateLabel(m.createdAt))}.</p>`;
     document.body.appendChild(area); window.print();
   }
   if (page === 'register') {
@@ -139,7 +139,7 @@
       if (!saveMembers([...members,member])) return;
       $('#registration-content').hidden=true;
       const success = $('#registration-success'); success.hidden=false;
-      success.innerHTML = `<div class="success-panel"><div class="alert alert-success">Pendaftaran berhasil.</div><h2 tabindex="-1" id="success-title">Selamat datang, ${escape(member.name.split(' ')[0])}!</h2><p>Data anggota sudah disimpan. Berikut kartu anggota sementara Anda.</p>${cardMarkup(member)}<p class="print-card-note">Simpan atau cetak kartu melalui dialog cetak browser.</p><div class="d-flex gap-2 justify-content-center"><button class="btn btn-primary" id="print-card">${icon('printer')} Cetak kartu</button><a class="btn btn-light" href="index.html">Kembali ke beranda</a></div><button id="register-again" class="btn btn-link mt-3">Daftarkan anggota lain ${icon('arrow')}</button></div>`;
+      success.innerHTML = `<div class="success-panel"><div class="alert alert-success">Pendaftaran berhasil.</div><h2 tabindex="-1" id="success-title">Selamat datang, ${escape(member.name.split(' ')[0])}!</h2><p>Data anggota sudah disimpan. Berikut kartu anggota Anda.</p>${cardMarkup(member)}<p class="print-card-note">Simpan atau cetak kartu melalui dialog cetak browser.</p><div class="d-flex gap-2 justify-content-center"><button class="btn btn-primary" id="print-card">${icon('printer')} Cetak kartu</button><a class="btn btn-light" href="index.html">Kembali ke beranda</a></div><button id="register-again" class="btn btn-link mt-3">Daftarkan anggota lain ${icon('arrow')}</button></div>`;
       $('#success-title').focus();
       $('#print-card').addEventListener('click',()=>printCard(member));
       $('#register-again').addEventListener('click',()=>{form.reset();success.hidden=true;$('#registration-content').hidden=false;$('#name').focus();});
@@ -156,11 +156,11 @@
     form.addEventListener('submit',event=> {
       event.preventDefault();
       const email = $('#login-email'), password = $('#password');
-      const validEmail = fieldError(email,email.value.trim().toLowerCase() === 'petugas@libreg.demo'?'':'Gunakan email demo petugas@libreg.demo.');
-      const validPassword = fieldError(password,password.value === 'library123'?'':'Gunakan password demo library123.');
+      const validEmail = fieldError(email,email.value.trim().toLowerCase() === 'petugas@libreg.demo'?'':'Email petugas tidak dikenali.');
+      const validPassword = fieldError(password,password.value === 'library123'?'':'Password tidak sesuai.');
       if (!validEmail || !validPassword) { $('.is-invalid',form)?.focus(); return; }
       try { sessionStorage.setItem(SESSION_KEY,'active'); window.location.href='anggota.html'; }
-      catch { notify('Sesi demo tidak dapat disimpan. Aktifkan penyimpanan browser.',true); }
+      catch { notify('Sesi login tidak dapat disimpan. Aktifkan penyimpanan browser.',true); }
     });
     if (new URLSearchParams(location.search).get('next')==='anggota') $('#login-context').hidden=false;
   }
@@ -208,14 +208,12 @@
       filtered.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'id'):new Date(b.createdAt)-new Date(a.createdAt));
       const pages=Math.max(1,Math.ceil(filtered.length/pageSize)); currentPage=Math.min(currentPage,pages);
       const shown=filtered.slice((currentPage-1)*pageSize,currentPage*pageSize);
-      $('#table-body').innerHTML=shown.map((m,i)=>`<tr><td>${(currentPage-1)*pageSize+i+1}</td><td><div class="table-person"><span class="member-avatar">${escape(initials(m.name))}</span><span>${escape(m.name)}${m.isDemo?'<small>Data contoh</small>':''}</span></div></td><td>${escape(m.number)}</td><td>${escape(m.program)}</td><td>${escape(m.type)}</td><td>${escape(m.phone)}</td><td class="member-email">${escape(m.email)}</td><td><div class="table-actions"><button class="table-action detail" data-action="detail" data-id="${escape(m.id)}" aria-label="Lihat detail ${escape(m.name)}" title="Detail">${icon('eye')}</button><button class="table-action edit" data-action="edit" data-id="${escape(m.id)}" aria-label="Edit ${escape(m.name)}" title="Edit">${icon('edit')}</button><button class="table-action delete" data-action="delete" data-id="${escape(m.id)}" aria-label="Hapus ${escape(m.name)}" title="Hapus">${icon('trash')}</button></div></td></tr>`).join('');
+      $('#table-body').innerHTML=shown.map((m,i)=>`<tr><td>${(currentPage-1)*pageSize+i+1}</td><td><div class="table-person"><span class="member-avatar">${escape(initials(m.name))}</span><span>${escape(m.name)}</span></div></td><td>${escape(m.number)}</td><td>${escape(m.program)}</td><td>${escape(m.type)}</td><td>${escape(m.phone)}</td><td class="member-email">${escape(m.email)}</td><td><div class="table-actions"><button class="table-action detail" data-action="detail" data-id="${escape(m.id)}" aria-label="Lihat detail ${escape(m.name)}" title="Detail">${icon('eye')}</button><button class="table-action edit" data-action="edit" data-id="${escape(m.id)}" aria-label="Edit ${escape(m.name)}" title="Edit">${icon('edit')}</button><button class="table-action delete" data-action="delete" data-id="${escape(m.id)}" aria-label="Hapus ${escape(m.name)}" title="Hapus">${icon('trash')}</button></div></td></tr>`).join('');
       $('#empty-state').hidden=filtered.length>0;
       $('#empty-title').textContent=members.length?'Anggota tidak ditemukan':'Belum ada anggota terdaftar';
-      $('#empty-description').textContent=members.length?'Coba kata kunci lain atau ubah filter jenis keanggotaan.':'Tambahkan anggota pertama atau muat data contoh untuk mencoba pengelolaan.';
+      $('#empty-description').textContent=members.length?'Coba kata kunci lain atau ubah filter jenis keanggotaan.':'Tambahkan anggota melalui formulir pendaftaran.';
       $('#result-count').textContent=`${filtered.length?((currentPage-1)*pageSize+1):0}-${Math.min(currentPage*pageSize,filtered.length)} dari ${filtered.length} anggota${query||type||program?' (hasil filter)':''}`;
       $('#page-controls').innerHTML=`<button class="page-button" data-page="${currentPage-1}" ${currentPage===1?'disabled':''} aria-label="Halaman sebelumnya">‹</button>${Array.from({length:pages},(_,i)=>i+1).filter(p=>Math.abs(p-currentPage)<2||p===1||p===pages).map((p,i,a)=>`${i&&p>a[i-1]+1?'<span aria-hidden="true">…</span>':''}<button class="page-button ${p===currentPage?'active':''}" data-page="${p}" ${p===currentPage?'aria-current="page"':''} aria-label="Halaman ${p}">${p}</button>`).join('')}<button class="page-button" data-page="${currentPage+1}" ${currentPage===pages?'disabled':''} aria-label="Halaman berikutnya">›</button>`;
-      $('#demo-button').hidden=members.some(m=>m.isDemo);
-      $('#demo-banner').hidden=!members.some(m=>m.isDemo);
     }
     ['#member-search','#type-filter','#program-filter','#sort-filter'].forEach(sel=>$(sel).addEventListener(sel==='#member-search'?'input':'change',()=>{currentPage=1;render();}));
     $('#page-controls').addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b&&!b.disabled){currentPage=Number(b.dataset.page);render();}});
@@ -244,13 +242,6 @@
     $('#confirm-delete').addEventListener('click',()=>{
       const members=readMembers();
       if(saveMembers(members.filter(m=>m.id!==deletingId))){deleteModal.hide();render();notify('Data anggota berhasil dihapus.');}
-    });
-    $('#demo-button').addEventListener('click',()=>{
-      const members=readMembers();
-      if(members.some(m=>m.isDemo))return;
-      const examples=[['Aditya Pratama','202401001','Teknik Informatika','Mahasiswa'],['Nadia Putri','202401002','Sistem Informasi','Mahasiswa'],['Rizky Ramadhan','202401003','Manajemen','Mahasiswa'],['Dr. Maya Lestari','198703152015042001','Teknik Informatika','Dosen'],['Fajar Maulana','202401004','Akuntansi','Mahasiswa'],['Siti Rahmawati','199105122019032002','Administrasi Akademik','Tenaga Kependidikan'],['Dimas Saputra','202401005','Teknik Elektro','Mahasiswa'],['Dr. Budi Santoso','198102092010011003','Ekonomi','Dosen']];
-      const demos=examples.filter(x=>!members.some(m=>normalizeNumber(m.number)===normalizeNumber(x[1]))).map((x,i)=>({id:id(),name:x[0],number:x[1],program:x[2],type:x[3],address:'Jl. Pendidikan No. 10, Kota Contoh',phone:`08120000000${i}`,email:`anggota${i+1}@example.com`,createdAt:new Date(Date.now()-i*86400000).toISOString(),isDemo:true}));
-      if(saveMembers([...members,...demos])){render();notify(`${demos.length} data contoh fiktif berhasil dimuat.`);}
     });
     window.addEventListener('storage',e=>{if(e.key===STORE_KEY||e.key===null)render();});
     render();

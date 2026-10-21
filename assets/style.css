@@ -71,7 +71,6 @@ a { color: var(--libreg-blue); text-underline-offset: 4px; }
 .statistics > div + div { border-left: 1px solid var(--libreg-line); }
 .statistics strong { display: block; font-size: 28px; line-height: 1.4; font-weight: 750; }
 .statistics span { color: var(--libreg-muted); font-size: 12px; }
-.statistics-note { text-align: center; margin: 12px 0 0; font-size: 10px; color: var(--libreg-muted); }
 .section-space { padding: 42px 0; }
 .home-about h2 { font-size: 22px; margin-bottom: 15px; }
 .home-about p, .facility-list { color: var(--libreg-muted); font-size: 13px; line-height: 1.85; }
@@ -124,8 +123,6 @@ textarea.form-control { min-height: 100px; resize: vertical; }
 .login-book { color: var(--libreg-blue); margin-bottom: 30px; }
 .login-book .icon { width: 46px; height: 46px; }
 .login-info-note { margin-top: auto; padding-top: 20px; border-top: 1px solid #c3ddf4; font-size: 11px; }
-.demo-credentials { padding: 14px; margin: 20px 0; background: #f0f6fd; font-size: 12px; }
-.demo-credentials strong { display: block; margin-bottom: 5px; }
 .input-password { position: relative; }
 .input-password input { padding-right: 44px; }
 .password-toggle { position: absolute; right: 0; top: 0; width: 44px; height: 43px; border: 0; background: transparent; color: var(--libreg-muted); }
@@ -260,7 +257,7 @@ body[data-page='members'] { background: #eff7ff; }
   .hero-media { position: relative; width: 100%; height: 215px; } .hero::after { display: none; }
   .home-statistics { order: 1; margin-top: 0; } .statistics { border-top: 0; padding: 24px 0 18px; }
   .statistics > div { padding: 10px 0; } .statistics > div:nth-child(3) { border-left: 0; }
-  .statistics strong { font-size: 25px; } .statistics-note { font-size: 9px; }
+  .statistics strong { font-size: 25px; }
   .home-services { order: 2; margin-top: 20px; } .feature-strip { grid-template-columns: 1fr 1fr; }
   .feature { padding: 23px 13px; } .feature:nth-child(3) { border-left: 0; } .feature:nth-child(n+3) { border-top: 1px solid var(--libreg-line); }
   .feature-icon .icon { width: 34px; height: 34px; } .feature h2 { font-size: 14px; } .feature p { font-size: 11px; }

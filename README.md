@@ -12,7 +12,7 @@ Aplikasi pendaftaran anggota perpustakaan untuk tugas Pemrograman Web, menggunak
 
 LibReg memakai navbar putih, hero lebar dengan teks di kiri dan foto perpustakaan di kanan, serta empat layanan dalam satu baris datar. Form desktop memiliki panel informasi di kiri dan isian dua kolom di kanan. Halaman Data Anggota menggunakan sidebar dan tabel tanpa kartu statistik. Menu utama terdiri dari Beranda, Tentang, Layanan, Data Anggota, Pendaftaran, dan Login.
 
-Form memeriksa kolom wajib, email, nomor telepon, dan keunikan NIM/NIP. Petugas dapat mencari anggota, membuka detail, mengedit, serta menghapus data dengan konfirmasi. Tersedia filter jenis dan program studi, urutan, paginasi lima baris, data contoh fiktif, dan kartu anggota simulasi yang dapat dicetak. Pada ponsel, formulir menjadi satu kolom dengan tombol tetap di bawah; sidebar petugas dapat dibuka melalui tombol menu.
+Form memeriksa kolom wajib, email, nomor telepon, dan keunikan NIM/NIP. Petugas dapat mencari anggota, membuka detail, mengedit, serta menghapus data dengan konfirmasi. Tersedia filter jenis dan program studi, urutan, paginasi lima baris, dan kartu anggota yang dapat dicetak. Pada ponsel, formulir menjadi satu kolom dengan tombol tetap di bawah; sidebar petugas dapat dibuka melalui tombol menu. Antarmuka menggunakan copy layanan perpustakaan tanpa keterangan tugas atau panel percobaan; tombol pemuat data contoh sudah dihapus.
 
 ## Menjalankan di komputer
 
