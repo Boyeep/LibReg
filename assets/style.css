@@ -123,6 +123,8 @@ textarea.form-control { min-height: 100px; resize: vertical; }
 .login-book { color: var(--libreg-blue); margin-bottom: 30px; }
 .login-book .icon { width: 46px; height: 46px; }
 .login-info-note { margin-top: auto; padding-top: 20px; border-top: 1px solid #c3ddf4; font-size: 11px; }
+.login-credentials { padding: 14px; margin: 20px 0; background: #f0f6fd; font-size: 12px; }
+.login-credentials strong { display: block; margin-bottom: 5px; }
 .input-password { position: relative; }
 .input-password input { padding-right: 44px; }
 .password-toggle { position: absolute; right: 0; top: 0; width: 44px; height: 43px; border: 0; background: transparent; color: var(--libreg-muted); }
