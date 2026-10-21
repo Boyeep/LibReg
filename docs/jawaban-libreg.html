@@ -40,7 +40,7 @@
   <p>Peminjaman dan pengembalian buku, katalog buku interaktif, pembayaran, database server, serta autentikasi petugas sungguhan belum termasuk pekerjaan pada tahap ini.</p>
 
   <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">2. Rancangan Halaman dan Struktur Menu</h2>
-  <p>Website dibagi menjadi enam halaman. Header dan footer digunakan secara bersama agar pengguna mendapatkan susunan navigasi yang sama saat berpindah halaman.</p>
+  <p>Website dibagi menjadi enam halaman. Halaman publik memakai header dan footer bersama. Halaman Data Anggota memakai sidebar agar petugas dapat berpindah menu sambil mengelola tabel.</p>
   <div style="overflow-x:auto">
     <table style="width:100%;border-collapse:collapse;min-width:570px">
       <thead><tr style="background:#e9ecef"><th style="border:1px solid #ccc;padding:10px;text-align:left">Menu / halaman</th><th style="border:1px solid #ccc;padding:10px;text-align:left">Nama file</th><th style="border:1px solid #ccc;padding:10px;text-align:left">Isi utama</th></tr></thead>
@@ -48,7 +48,7 @@
         <tr><td style="border:1px solid #ccc;padding:10px">Beranda</td><td style="border:1px solid #ccc;padding:10px"><code>index.html</code></td><td style="border:1px solid #ccc;padding:10px">Informasi awal, layanan, fasilitas, dan tombol pendaftaran.</td></tr>
         <tr><td style="border:1px solid #ccc;padding:10px">Tentang Perpustakaan</td><td style="border:1px solid #ccc;padding:10px"><code>tentang.html</code></td><td style="border:1px solid #ccc;padding:10px">Profil singkat, visi, dan misi.</td></tr>
         <tr><td style="border:1px solid #ccc;padding:10px">Layanan</td><td style="border:1px solid #ccc;padding:10px"><code>layanan.html</code></td><td style="border:1px solid #ccc;padding:10px">Informasi koleksi, ruang baca, fasilitas, dan jam layanan.</td></tr>
-        <tr><td style="border:1px solid #ccc;padding:10px">Daftar Anggota</td><td style="border:1px solid #ccc;padding:10px"><code>anggota.html</code></td><td style="border:1px solid #ccc;padding:10px">Tabel anggota dan tombol pengelolaan setelah login simulasi.</td></tr>
+        <tr><td style="border:1px solid #ccc;padding:10px">Data Anggota</td><td style="border:1px solid #ccc;padding:10px"><code>anggota.html</code></td><td style="border:1px solid #ccc;padding:10px">Tabel anggota dan tombol pengelolaan setelah login simulasi.</td></tr>
         <tr><td style="border:1px solid #ccc;padding:10px">Pendaftaran Anggota</td><td style="border:1px solid #ccc;padding:10px"><code>pendaftaran.html</code></td><td style="border:1px solid #ccc;padding:10px">Form data diri, validasi, dan hasil pendaftaran.</td></tr>
         <tr><td style="border:1px solid #ccc;padding:10px">Login Petugas</td><td style="border:1px solid #ccc;padding:10px"><code>login.html</code></td><td style="border:1px solid #ccc;padding:10px">Form masuk dan petunjuk akun demo.</td></tr>
       </tbody>
@@ -60,7 +60,7 @@
 ├── Beranda
 ├── Tentang Perpustakaan
 ├── Layanan
-├── Daftar Anggota
+├── Data Anggota
 │   └── Login petugas jika belum masuk
 ├── Pendaftaran Anggota
 └── Login Petugas
@@ -75,31 +75,32 @@
   <h3 style="font-size:19px;margin:20px 0 10px">Rancangan susunan halaman</h3>
   <ul style="padding-left:24px">
     <li><strong>Beranda:</strong> navbar → hero teks dan foto → empat layanan → statistik ilustratif → tentang dan fasilitas → footer.</li>
-    <li><strong>Pendaftaran:</strong> navbar → judul dan petunjuk → kolom identitas → alamat → tombol Reset dan Daftar → hasil pendaftaran.</li>
-    <li><strong>Data anggota:</strong> navbar → judul dan Tambah Anggota → jumlah anggota → pencarian/filter → tabel → tombol halaman.</li>
+    <li><strong>Pendaftaran:</strong> navbar → breadcrumb → panel informasi di kiri dan form dua kolom di kanan → alamat → tombol Reset dan Daftar → hasil pendaftaran.</li>
+    <li><strong>Data anggota:</strong> sidebar di kiri → judul dan Tambah Anggota → pencarian serta filter jenis dan program studi → tabel → tombol halaman.</li>
     <li><strong>Login:</strong> navbar → form email dan password → tombol Masuk → keterangan bahwa login merupakan simulasi.</li>
   </ul>
-  <p>Pada layar kecil, navbar memakai tombol hamburger. Kolom formulir berubah menjadi satu kolom, sedangkan tabel dapat digeser ke samping jika lebarnya melebihi layar.</p>
+  <p>Pada layar kecil, navbar dan sidebar petugas dibuka melalui tombol menu. Panel informasi pendaftaran disembunyikan dan formulir menjadi satu kolom. Tombol Reset dan Daftar tetap berada di bawah layar. Tabel dapat digeser ke samping.</p>
 
   <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">3. Desain UI Landing Page</h2>
-  <p>Landing page menggunakan Bootstrap dengan penyesuaian pada warna, jarak, dan ukuran komponen. Navbar berlatar putih dengan logo biru. Hero memakai panel biru muda, judul yang lebih besar, dan foto perpustakaan. Font Segoe UI dengan cadangan Arial menjaga teks tetap mudah dibaca.</p>
+  <p>Landing page menggunakan Bootstrap dengan penyesuaian pada warna, jarak, dan ukuran komponen. Navbar berlatar putih dengan logo biru. Hero memenuhi lebar halaman dengan teks di kiri dan foto di kanan. Warna biru muda memudar ke arah foto agar keduanya menyatu. Font Inter disimpan lokal, dengan cadangan Arial.</p>
   <ol style="padding-left:24px">
     <li><strong>Header:</strong> ikon buku, nama LibReg, dan menu navigasi.</li>
-    <li><strong>Hero:</strong> judul “Selamat datang di ruang belajar Anda.”, penjelasan singkat, foto rak buku, serta tombol Daftar Anggota dan Lihat Layanan.</li>
-    <li><strong>Layanan:</strong> empat kartu berikon berisi Koleksi Buku, Ruang Baca, Referensi Digital, dan Daftar Online.</li>
+    <li><strong>Hero:</strong> judul “Selamat Datang di Perpustakaan Universitas”, penjelasan singkat, foto ruang baca, serta tombol Data Anggota dan Lihat Layanan.</li>
+    <li><strong>Layanan:</strong> empat bagian dalam satu baris datar berisi Koleksi Lengkap, Akses untuk Semua, Layanan Digital, dan Ruang Nyaman. Garis tipis memisahkan setiap bagian.</li>
     <li><strong>Statistik:</strong> angka ilustratif untuk jumlah koleksi, anggota, jurnal, dan tahun layanan. Terdapat keterangan bahwa angka tersebut hanya contoh.</li>
     <li><strong>Tentang dan fasilitas:</strong> penjelasan perpustakaan serta daftar fasilitas dalam dua kolom.</li>
     <li><strong>Footer:</strong> identitas aplikasi, kontak contoh, dan jam layanan.</li>
   </ol>
+  <p>Rancangan desktop dan ponsel tersedia pada <a href="https://www.figma.com/design/1gZ8II5oG4kGifJy9WiUPQ/Untitled?node-id=323-734" style="color:#1756a0">file Figma LibReg</a>. Posisi, ukuran, dan susunan halaman mengikuti referensi dengan tampilan datar.</p>
   <figure style="margin:24px 0">
-    <img src="../screenshots/beranda-desktop.png" alt="Landing page LibReg dengan navbar putih, hero, layanan, statistik, dan footer" style="width:100%;height:auto;border:1px solid #ccc" loading="lazy" width="1440" height="1778">
+    <img src="../screenshots/beranda-desktop.png" alt="Landing page LibReg dengan navbar putih, hero, layanan, statistik, dan footer" style="width:100%;height:auto;border:1px solid #ccc" loading="lazy" width="1440" height="1384">
     <figcaption style="font-size:14px;color:#666;margin-top:8px">Hasil desain landing page pada layar desktop.</figcaption>
   </figure>
 
   <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">4. Implementasi Website</h2>
   <p>Implementasi menggunakan HTML untuk struktur halaman, Bootstrap untuk komponen, CSS untuk penyesuaian tampilan, dan JavaScript untuk interaksi. Seluruh aset yang diperlukan tersedia secara lokal.</p>
   <p>Form pendaftaran berisi nama lengkap, NIM/NIP, program studi atau unit kerja, alamat, telepon, email, dan jenis keanggotaan. Setelah semua data valid dan berhasil disimpan, aplikasi menampilkan pesan berhasil serta kartu anggota simulasi.</p>
-  <p>Petugas dapat mencari anggota berdasarkan nama atau nomor induk, membuka detail, mengedit, dan menghapus data. Saat menghapus, aplikasi menampilkan dialog konfirmasi terlebih dahulu. Pemeriksaan NIM/NIP unik juga dilakukan ketika data diedit.</p>
+  <p>Petugas dapat mencari anggota berdasarkan nama, nomor induk, atau program studi, serta memakai filter jenis dan program studi. Tabel memuat nomor urut, nama, NIM/NIP, program studi, jenis, telepon, email, dan tombol aksi. Petugas dapat membuka detail, mengedit, dan menghapus data. Saat menghapus, aplikasi menampilkan dialog konfirmasi terlebih dahulu. Pemeriksaan NIM/NIP unik juga dilakukan ketika data diedit.</p>
   <p>Data anggota disimpan dengan key <code>libraryreg.members.v1</code> pada localStorage. Oleh karena itu, data tetap tersedia setelah reload, tetapi hanya pada browser dan alamat situs yang sama. Penghapusan data situs pada browser akan menghapus data anggota tersebut.</p>
 
   <h3 style="font-size:19px;margin:20px 0 10px">Cara menjalankan</h3>

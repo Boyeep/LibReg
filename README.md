@@ -6,12 +6,13 @@ Aplikasi pendaftaran anggota perpustakaan untuk tugas Pemrograman Web, menggunak
 - Repository: [Boyeep/LibReg](https://github.com/Boyeep/LibReg)
 - [Jawaban tugas](docs/jawaban-libreg.html)
 - [Blog proyek](docs/blog-libreg.html)
+- [Desain Figma](https://www.figma.com/design/1gZ8II5oG4kGifJy9WiUPQ/Untitled?node-id=323-734)
 
 ## Tampilan dan fitur
 
-LibReg memakai navbar putih dengan identitas biru, hero dengan foto perpustakaan, kartu layanan berikon, serta form dan tabel yang responsif. Menu utama terdiri dari Beranda, Tentang, Layanan, Daftar Anggota, Pendaftaran, dan Login Petugas.
+LibReg memakai navbar putih, hero lebar dengan teks di kiri dan foto perpustakaan di kanan, serta empat layanan dalam satu baris datar. Form desktop memiliki panel informasi di kiri dan isian dua kolom di kanan. Halaman Data Anggota menggunakan sidebar dan tabel tanpa kartu statistik. Menu utama terdiri dari Beranda, Tentang, Layanan, Data Anggota, Pendaftaran, dan Login.
 
-Form memeriksa kolom wajib, email, nomor telepon, dan keunikan NIM/NIP. Petugas dapat mencari anggota, membuka detail, mengedit, serta menghapus data dengan konfirmasi. Tersedia filter, urutan, paginasi, data contoh fiktif, dan kartu anggota simulasi yang dapat dicetak.
+Form memeriksa kolom wajib, email, nomor telepon, dan keunikan NIM/NIP. Petugas dapat mencari anggota, membuka detail, mengedit, serta menghapus data dengan konfirmasi. Tersedia filter jenis dan program studi, urutan, paginasi lima baris, data contoh fiktif, dan kartu anggota simulasi yang dapat dicetak. Pada ponsel, formulir menjadi satu kolom dengan tombol tetap di bawah; sidebar petugas dapat dibuka melalui tombol menu.
 
 ## Menjalankan di komputer
 
@@ -61,6 +62,8 @@ Perubahan pada checkout lokal belum memperbarui domain sampai dikirim ke repo da
 
 - Bootstrap lokal dengan lisensi MIT pada `assets/vendor/`.
 - Foto rak buku dari [Unsplash](https://images.unsplash.com/photo-1507842217343-583bb7270b66), disimpan pada `assets/images/library.jpg`.
+- Foto ruang baca dari aset pada file Figma yang diberikan pengguna, disimpan pada `assets/images/library-interior.png`.
+- Font Inter lokal dengan lisensi OFL pada `assets/fonts/`.
 - Logo dan ikon SVG di dalam kode.
 
 Profil, kontak, jam layanan, statistik, dan data contoh merupakan ilustrasi tugas.

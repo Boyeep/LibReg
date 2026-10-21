@@ -13,7 +13,7 @@
   <p>Kasus yang diberikan adalah perpustakaan kampus yang masih menerima pendaftaran dengan formulir kertas. Dari kasus tersebut, saya membuat form online dan halaman petugas agar data anggota dapat ditambahkan, dicari, diperbarui, dan dihapus.</p>
 
   <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">Menentukan Halaman yang Dibutuhkan</h2>
-  <p>Saya membagi website menjadi enam halaman: Beranda, Tentang Perpustakaan, Layanan, Pendaftaran Anggota, Daftar Anggota, dan Login Petugas. Pembagian ini membuat isi setiap file lebih jelas. Form pendaftaran tidak dicampur dengan tabel pengelolaan anggota.</p>
+  <p>Saya membagi website menjadi enam halaman: Beranda, Tentang Perpustakaan, Layanan, Pendaftaran Anggota, Data Anggota, dan Login Petugas. Pembagian ini membuat isi setiap file lebih jelas. Form pendaftaran tidak dicampur dengan tabel pengelolaan anggota.</p>
   <pre style="padding:16px;background:#f5f5f5;border:1px solid #ddd;overflow-x:auto;font-size:14px;line-height:1.7">LibReg/
 ├── index.html
 ├── tentang.html
@@ -25,38 +25,45 @@
 │   ├── style.css
 │   ├── app.js
 │   ├── favicon.svg
-│   ├── images/library.jpg
+│   ├── images/
+│   │   ├── library.jpg
+│   │   └── library-interior.png
+│   ├── fonts/
 │   └── vendor/
 │       ├── bootstrap.min.css
 │       └── bootstrap.bundle.min.js
 ├── screenshots/
-├── tests/
+├── docs/
 └── README.md</pre>
   <p>File <code>style.css</code> berisi gaya tambahan, sementara <code>app.js</code> menangani navigasi bersama, validasi, penyimpanan, dan pengelolaan data. Bootstrap disimpan di folder <code>vendor</code> supaya website tetap bisa digunakan tanpa mengambil file dari CDN.</p>
 
   <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">Membuat Tampilan Beranda</h2>
-  <p>Untuk tampilan, saya memakai navbar putih dengan identitas biru dan latar halaman yang terang. Hero berisi judul, penjelasan singkat, dua tombol, serta foto rak buku dalam panel biru muda. Kartu layanan dilengkapi ikon, sedangkan statistik dan fasilitas disusun agar mudah dibaca.</p>
-  <p>Susunan kolom menggunakan grid Bootstrap. Contohnya, teks hero berada di tujuh kolom dan foto berada di lima kolom pada layar sedang ke atas. Ketika dibuka di ponsel, keduanya tersusun ke bawah.</p>
-  <pre style="padding:16px;background:#f5f5f5;border:1px solid #ddd;overflow-x:auto;font-size:14px;line-height:1.7"><code>&lt;div class="row align-items-center g-4"&gt;
-  &lt;div class="col-md-7"&gt;
-    &lt;h1&gt;Selamat Datang di Perpustakaan Universitas&lt;/h1&gt;
-    &lt;p&gt;Informasi singkat tentang perpustakaan.&lt;/p&gt;
+  <p>Untuk tampilan, saya memakai navbar putih dengan identitas biru dan latar halaman yang terang. Hero dibuat lebar dengan judul dan tombol di kiri, sedangkan foto ruang baca mengisi bagian kanan. Empat layanan disusun dalam satu bidang putih dengan garis pemisah, lalu diikuti statistik dan fasilitas.</p>
+  <p>Bootstrap digunakan untuk navbar, modal, dan beberapa kolom informasi. Untuk hero, foto diposisikan di kanan dengan lebar 57%, lalu diberi transisi warna dari kiri. Pada ponsel, foto dipindah ke bawah teks dan kedua tombol ditumpuk.</p>
+  <pre style="padding:16px;background:#f5f5f5;border:1px solid #ddd;overflow-x:auto;font-size:14px;line-height:1.7"><code>&lt;section class="hero"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="hero-copy"&gt;
+      &lt;h1&gt;Selamat Datang di Perpustakaan Universitas&lt;/h1&gt;
+      &lt;p&gt;Informasi singkat tentang perpustakaan.&lt;/p&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
-  &lt;div class="col-md-5"&gt;
-    &lt;img src="assets/images/library.jpg"
-         class="hero-image" alt="Rak buku perpustakaan"&gt;
+  &lt;div class="hero-media"&gt;
+    &lt;img src="assets/images/library-interior.png"
+         alt="Ruang baca perpustakaan"&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/section&gt;</code></pre>
   <figure style="margin:24px 0">
-    <img src="../screenshots/beranda-viewport.png" alt="Tampilan beranda LibReg dengan navbar putih dan empat kartu layanan" style="width:100%;height:auto;border:1px solid #ccc" loading="lazy" width="1440" height="1000">
-    <figcaption style="font-size:14px;color:#666;margin-top:8px">Beranda LibReg dengan hero biru muda, kartu layanan berikon, dan navigasi yang terstruktur.</figcaption>
+    <img src="../screenshots/beranda-viewport.png" alt="Tampilan beranda LibReg dengan navbar putih dan empat layanan dalam satu baris" style="width:100%;height:auto;border:1px solid #ccc" loading="lazy" width="1440" height="1000">
+    <figcaption style="font-size:14px;color:#666;margin-top:8px">Beranda LibReg dengan hero lebar, layanan dalam satu baris datar, dan navigasi yang terstruktur.</figcaption>
   </figure>
+
+  <p>Rancangan posisi dan ukuran halaman juga saya susun di <a href="https://www.figma.com/design/1gZ8II5oG4kGifJy9WiUPQ/Untitled?node-id=323-734" style="color:#1756a0">Figma LibReg</a>. Rancangannya mencakup beranda, pendaftaran, dan halaman anggota pada desktop, serta beranda dan pendaftaran pada ponsel. Font yang digunakan adalah Inter.</p>
 
   <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">Form Pendaftaran Anggota</h2>
   <p>Form pendaftaran berisi tujuh data utama: nama lengkap, NIM/NIP, program studi atau unit kerja, jenis keanggotaan, nomor telepon, email, dan alamat. Pilihan jenis keanggotaan terdiri dari mahasiswa, dosen, dan tenaga kependidikan.</p>
-  <p>Pada desktop, beberapa kolom disusun berdampingan. Pada ponsel, semua kolom ditampilkan dalam satu kolom. Tombol Reset digunakan untuk mengosongkan isian dan tombol Daftar Sekarang untuk memproses data.</p>
+  <p>Pada desktop, panel informasi berada di kiri dan form dua kolom berada di kanan. Pada ponsel, panel kiri disembunyikan, semua isian menjadi satu kolom, dan tombol tetap di bawah layar. Tombol Reset mengosongkan isian dan Daftar Sekarang memproses data.</p>
   <figure style="margin:24px 0">
-    <img src="../screenshots/pendaftaran-desktop.png" alt="Form pendaftaran anggota LibReg dengan data identitas dan tombol Reset serta Daftar" style="width:100%;height:auto;border:1px solid #ccc" loading="lazy" width="1440" height="1185">
+    <img src="../screenshots/pendaftaran-desktop.png" alt="Form pendaftaran anggota LibReg dengan data identitas dan tombol Reset serta Daftar" style="width:100%;height:auto;border:1px solid #ccc" loading="lazy" width="1440" height="1073">
     <figcaption style="font-size:14px;color:#666;margin-top:8px">Form pendaftaran anggota pada layar desktop.</figcaption>
   </figure>
 
@@ -81,15 +88,15 @@ const daftarAnggotaBaru = dataTersimpan
   <p>localStorage membantu menjaga data setelah halaman dimuat ulang. Namun, datanya hanya tersedia pada browser dan alamat situs yang sama. Data yang dibuat di satu komputer tidak otomatis muncul di komputer lain.</p>
 
   <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">Halaman Petugas dan Pengelolaan Anggota</h2>
-  <p>Halaman Daftar Anggota menampilkan tabel berisi nama, NIM/NIP, program studi atau unit kerja, jenis anggota, dan tanggal pendaftaran. Di atas tabel terdapat pencarian dan pilihan filter. Setiap baris memiliki tiga tombol: Detail, Edit, dan Hapus.</p>
+  <p>Halaman Data Anggota memakai sidebar di kiri dan area tabel di kanan. Tabel berisi nomor urut, nama, NIM/NIP, program studi atau unit kerja, jenis anggota, nomor telepon, email, dan tombol aksi. Pencarian dapat memakai nama, NIM/NIP, atau program studi. Tersedia filter jenis dan program studi, dengan lima baris per halaman. Setiap baris memiliki tiga tombol: Detail, Edit, dan Hapus.</p>
   <ul style="padding-left:24px">
     <li><strong>Detail</strong> membuka informasi lengkap anggota.</li>
     <li><strong>Edit</strong> membuka form yang sudah berisi data anggota untuk diperbarui.</li>
     <li><strong>Hapus</strong> menampilkan konfirmasi sebelum data dihapus.</li>
   </ul>
-  <p>Detail, edit, dan konfirmasi hapus menggunakan modal Bootstrap. Setelah perubahan berhasil disimpan, daftar dan jumlah anggota ikut diperbarui. Notifikasi dipakai untuk memberi tahu hasil tindakan kepada pengguna.</p>
+  <p>Detail, edit, dan konfirmasi hapus menggunakan modal Bootstrap. Setelah perubahan berhasil disimpan, tabel dan jumlah hasil ikut diperbarui. Notifikasi dipakai untuk memberi tahu hasil tindakan kepada pengguna.</p>
   <figure style="margin:24px 0">
-    <img src="../screenshots/anggota-desktop.png" alt="Tabel data anggota LibReg dengan pencarian, filter, serta tombol Detail, Edit, dan Hapus" style="width:100%;height:auto;border:1px solid #ccc" loading="lazy" width="1440" height="1417">
+    <img src="../screenshots/anggota-desktop.png" alt="Tabel data anggota LibReg dengan pencarian, filter, serta tombol Detail, Edit, dan Hapus" style="width:100%;height:auto;border:1px solid #ccc" loading="lazy" width="1440" height="1000">
     <figcaption style="font-size:14px;color:#666;margin-top:8px">Contoh tabel anggota. Nama dan nomor pada gambar adalah data fiktif.</figcaption>
   </figure>
 
@@ -107,7 +114,7 @@ python -m http.server 4173</code></pre>
   <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">Yang Dipelajari dari Tugas Ini</h2>
   <p>Melalui LibReg, saya mempraktikkan penggunaan komponen Bootstrap, pembuatan form, validasi dengan JavaScript, dan penyimpanan data sederhana. Bagian pentingnya adalah menghubungkan setiap tindakan pada antarmuka dengan perubahan data: menambah melalui form, membaca di tabel, mengedit melalui modal, lalu menghapus setelah konfirmasi.</p>
 
-  <p style="border-top:1px solid #ccc;padding-top:18px;margin-top:30px"><a href="https://libreg.boysteven.com" style="color:#1756a0">Buka website LibReg</a> · <a href="https://github.com/Boyeep/LibReg" style="color:#1756a0">Source code GitHub</a> · <a href="jawaban-libreg.html" style="color:#1756a0">Lihat jawaban soal 1–4</a></p>
+  <p style="border-top:1px solid #ccc;padding-top:18px;margin-top:30px"><a href="https://libreg.boysteven.com" style="color:#1756a0">Buka website LibReg</a> · <a href="https://github.com/Boyeep/LibReg" style="color:#1756a0">Source code GitHub</a> · <a href="jawaban-libreg.html" style="color:#1756a0">Lihat jawaban soal 1-4</a></p>
 </article>
 </body>
 </html>

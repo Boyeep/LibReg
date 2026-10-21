@@ -28,11 +28,11 @@
   const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const brand = `<span class="brand-icon">${icon('book')}</span><span>LibReg<small>Perpustakaan Universitas</small></span>`;
   const page = document.body.dataset.page;
-  const navItems = [['index.html','Beranda','home'],['tentang.html','Tentang','about'],['layanan.html','Layanan','services'],['anggota.html','Daftar Anggota','members'],['pendaftaran.html','Pendaftaran','register']];
+  const navItems = [['index.html','Beranda','home'],['tentang.html','Tentang','about'],['layanan.html','Layanan','services'],['pendaftaran.html','Pendaftaran','register'],['anggota.html','Data Anggota','members']];
   const nav = $('#site-header');
-  if (nav) nav.innerHTML = `<nav class="navbar navbar-expand-lg site-navbar" aria-label="Navigasi utama"><div class="container"><a class="navbar-brand d-flex align-items-center gap-2" href="index.html" aria-label="LibReg, beranda">${brand}</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Buka menu navigasi"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="main-nav"><ul class="navbar-nav ms-auto">${navItems.map(([url,label,key])=>`<li class="nav-item"><a class="nav-link ${page===key?'active':''}" ${page===key?'aria-current="page"':''} href="${url}">${label}</a></li>`).join('')}</ul>${page==='members'?'<button class="btn btn-outline-primary btn-sm ms-lg-3" id="logout">Keluar</button>':'<a href="login.html" class="btn btn-outline-primary btn-sm ms-lg-3">Login Petugas</a>'}</div></div></nav>`;
+  if (nav && page !== 'members') nav.innerHTML = `<nav class="navbar navbar-expand-lg site-navbar" aria-label="Navigasi utama"><div class="container"><a class="navbar-brand d-flex align-items-center gap-2" href="index.html" aria-label="LibReg, beranda">${brand}</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Buka menu navigasi"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="main-nav"><ul class="navbar-nav ms-auto">${navItems.map(([url,label,key])=>`<li class="nav-item"><a class="nav-link ${page===key?'active':''}" ${page===key?'aria-current="page"':''} href="${url}">${label}</a></li>`).join('')}</ul>${page==='members'?'<button class="btn btn-outline-primary btn-sm ms-lg-3" id="logout">Keluar</button>':'<a href="login.html" class="btn btn-primary btn-sm ms-lg-3">Login</a>'}</div></div></nav>`;
   const footer = $('#site-footer');
-  if (footer) footer.innerHTML = `<footer class="site-footer"><div class="container"><div class="row g-3"><div class="col-md-4"><h2 class="h5 footer-brand">LibReg</h2><p>Pendaftaran anggota perpustakaan yang lebih mudah.<br>Proyek Pemrograman Web.</p></div><div class="col-md-4"><h2 class="h6">Kontak</h2><p>Gedung Perpustakaan, Kampus Utama<br>perpustakaan@universitas.example<br>(021) 555 0123</p></div><div class="col-md-4"><h2 class="h6">Jam layanan</h2><p>Senin–Jumat: 08.00–16.00 WIB<br>Sabtu, Minggu, dan hari libur: tutup.</p></div></div><div class="footer-note">© ${new Date().getFullYear()} LibReg. Profil dan kontak merupakan contoh untuk tugas.</div></div></footer>`;
+  if (footer && page !== 'members') footer.innerHTML = `<footer class="site-footer"><div class="container"><div class="row g-3"><div class="col-md-4"><h2 class="h5 footer-brand">LibReg</h2><p>Pendaftaran anggota perpustakaan yang lebih mudah.<br>Proyek Pemrograman Web.</p></div><div class="col-md-4"><h2 class="h6">Kontak</h2><p>Gedung Perpustakaan, Kampus Utama<br>perpustakaan@universitas.example<br>(021) 555 0123</p></div><div class="col-md-4"><h2 class="h6">Jam layanan</h2><p>Senin-Jumat: 08.00-16.00 WIB<br>Sabtu, Minggu, dan hari libur: tutup.</p></div></div><div class="footer-note">© ${new Date().getFullYear()} LibReg. Profil dan kontak merupakan contoh untuk tugas.</div></div></footer>`;
   $$('[data-icon]').forEach(el => el.innerHTML = icon(el.dataset.icon));
   const toastHost = document.createElement('div');
   toastHost.className = 'toast-container position-fixed bottom-0 end-0 p-3';
@@ -45,7 +45,7 @@
     toast.setAttribute('role',error?'alert':'status');
     toast.innerHTML = `<div class="toast-body">${icon(error?'info':'check')}<span class="flex-grow-1">${escape(message)}</span><button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="Tutup notifikasi"></button></div>`;
     toastHost.appendChild(toast);
-    const instance = new bootstrap.Toast(toast,{delay:5500});
+    const instance = new bootstrap.Toast(toast,{delay:5500,animation:false});
     toast.addEventListener('hidden.bs.toast',()=>{instance.dispose();toast.remove();});
     instance.show();
   }
@@ -91,11 +91,11 @@
     if (!value) error = 'Kolom ini wajib diisi.';
     else if (field.name === 'name' && value.length < 3) error = 'Nama lengkap minimal 3 karakter.';
     else if (field.name === 'number') {
-      if (!/^[A-Za-z0-9][A-Za-z0-9 .\/-]{2,29}$/.test(value)) error = 'Nomor induk 3–30 karakter: huruf, angka, titik, garis miring, atau tanda hubung.';
+      if (!/^[A-Za-z0-9][A-Za-z0-9 .\/-]{2,29}$/.test(value)) error = 'Nomor induk 3-30 karakter: huruf, angka, titik, garis miring, atau tanda hubung.';
       else if (members.some(m=> m.id!==excludeId && normalizeNumber(m.number)===normalizeNumber(value))) error = 'NIM/NIP sudah terdaftar. Gunakan nomor induk yang berbeda.';
     } else if (field.name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = 'Masukkan alamat email yang valid, misalnya nama@kampus.ac.id.';
-    else if (field.name === 'phone' && !/^\+?[\d\s()-]{8,20}$/.test(value)) error = 'Gunakan nomor telepon 8–15 digit, misalnya 081234567890.';
-    else if (field.name === 'phone' && (value.replace(/\D/g,'').length < 8 || value.replace(/\D/g,'').length > 15)) error = 'Nomor telepon harus terdiri dari 8–15 digit.';
+    else if (field.name === 'phone' && !/^\+?[\d\s()-]{8,20}$/.test(value)) error = 'Gunakan nomor telepon 8-15 digit, misalnya 081234567890.';
+    else if (field.name === 'phone' && (value.replace(/\D/g,'').length < 8 || value.replace(/\D/g,'').length > 15)) error = 'Nomor telepon harus terdiri dari 8-15 digit.';
     else if (field.name === 'address' && value.length < 8) error = 'Alamat minimal 8 karakter agar cukup jelas.';
     else if (field.name === 'program' && value.length < 2) error = 'Masukkan program studi atau unit kerja Anda.';
     else if (field.name === 'type' && !TYPES.includes(value)) error = 'Pilih jenis keanggotaan yang tersedia.';
@@ -167,9 +167,21 @@
   if (page === 'members') {
     if (!isStaff()) { location.replace('login.html?next=anggota'); return; }
     document.body.hidden = false;
+    const sidebar=$('#staff-sidebar');
+    sidebar.innerHTML=`<a class="navbar-brand staff-brand" href="index.html">${brand}</a><nav class="staff-links" aria-label="Navigasi petugas"><a href="index.html">${icon('home')} Beranda</a><a href="pendaftaran.html">${icon('file')} Pendaftaran</a><a href="anggota.html" class="active" aria-current="page">${icon('users')} Data Anggota</a><a href="layanan.html">${icon('computer')} Layanan</a><a href="tentang.html">${icon('info')} Tentang</a></nav><button class="staff-logout" id="logout">${icon('logout')} Keluar</button>`;
+    $('#staff-mobile-brand').innerHTML=brand;
+    const toggle=$('#staff-menu-toggle');
+    const closeMenu=()=>{sidebar.classList.remove('open');$('#staff-overlay')?.remove();toggle.setAttribute('aria-expanded','false');};
+    toggle.addEventListener('click',()=>{
+      if(sidebar.classList.contains('open')){closeMenu();return;}
+      sidebar.classList.add('open');toggle.setAttribute('aria-expanded','true');
+      const overlay=document.createElement('button');overlay.id='staff-overlay';overlay.className='staff-overlay';overlay.setAttribute('aria-label','Tutup menu petugas');overlay.addEventListener('click',closeMenu);document.body.appendChild(overlay);
+      $('#logout').focus();
+    });
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();}});
     $('#logout').addEventListener('click',()=>{try{sessionStorage.removeItem(SESSION_KEY);}catch{} location.href='login.html';});
     let currentPage=1, editingId=null, deletingId=null;
-    const pageSize=6;
+    const pageSize=5;
     const detailsModal = new bootstrap.Modal($('#detail-modal'));
     const editModal = new bootstrap.Modal($('#edit-modal'));
     const deleteModal = new bootstrap.Modal($('#delete-modal'));
@@ -185,21 +197,27 @@
       $('#stat-staff').textContent=members.filter(m=>m.type==='Tenaga Kependidikan').length;
       const query=$('#member-search').value.trim().toLocaleLowerCase('id');
       const type=$('#type-filter').value;
+      const programSelect=$('#program-filter');
+      const selectedProgram=programSelect.value;
+      const programs=[...new Set(members.map(m=>m.program))].sort((a,b)=>a.localeCompare(b,'id'));
+      programSelect.innerHTML='<option value="">Semua Program Studi</option>'+programs.map(p=>`<option value="${escape(p)}">${escape(p)}</option>`).join('');
+      programSelect.value=programs.includes(selectedProgram)?selectedProgram:'';
+      const program=programSelect.value;
       const sort=$('#sort-filter').value;
-      const filtered=members.filter(m=>(!type||m.type===type)&&(!query||m.name.toLocaleLowerCase('id').includes(query)||normalizeNumber(m.number).includes(normalizeNumber(query))));
+      const filtered=members.filter(m=>(!type||m.type===type)&&(!program||m.program===program)&&(!query||m.name.toLocaleLowerCase('id').includes(query)||normalizeNumber(m.number).includes(normalizeNumber(query))||m.program.toLocaleLowerCase('id').includes(query)));
       filtered.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'id'):new Date(b.createdAt)-new Date(a.createdAt));
       const pages=Math.max(1,Math.ceil(filtered.length/pageSize)); currentPage=Math.min(currentPage,pages);
       const shown=filtered.slice((currentPage-1)*pageSize,currentPage*pageSize);
-      $('#table-body').innerHTML=shown.map(m=>`<tr><td>${escape(m.name)}${m.isDemo?'<small class="d-block text-muted">Data contoh</small>':''}</td><td>${escape(m.number)}</td><td>${escape(m.program)}</td><td>${escape(m.type)}</td><td>${escape(dateLabel(m.createdAt))}</td><td><div class="table-actions"><button class="btn btn-sm btn-outline-primary" data-action="detail" data-id="${escape(m.id)}" aria-label="Lihat detail ${escape(m.name)}">Detail</button><button class="btn btn-sm btn-outline-secondary" data-action="edit" data-id="${escape(m.id)}" aria-label="Edit ${escape(m.name)}">Edit</button><button class="btn btn-sm btn-outline-danger" data-action="delete" data-id="${escape(m.id)}" aria-label="Hapus ${escape(m.name)}">Hapus</button></div></td></tr>`).join('');
+      $('#table-body').innerHTML=shown.map((m,i)=>`<tr><td>${(currentPage-1)*pageSize+i+1}</td><td><div class="table-person"><span class="member-avatar">${escape(initials(m.name))}</span><span>${escape(m.name)}${m.isDemo?'<small>Data contoh</small>':''}</span></div></td><td>${escape(m.number)}</td><td>${escape(m.program)}</td><td>${escape(m.type)}</td><td>${escape(m.phone)}</td><td class="member-email">${escape(m.email)}</td><td><div class="table-actions"><button class="table-action detail" data-action="detail" data-id="${escape(m.id)}" aria-label="Lihat detail ${escape(m.name)}" title="Detail">${icon('eye')}</button><button class="table-action edit" data-action="edit" data-id="${escape(m.id)}" aria-label="Edit ${escape(m.name)}" title="Edit">${icon('edit')}</button><button class="table-action delete" data-action="delete" data-id="${escape(m.id)}" aria-label="Hapus ${escape(m.name)}" title="Hapus">${icon('trash')}</button></div></td></tr>`).join('');
       $('#empty-state').hidden=filtered.length>0;
       $('#empty-title').textContent=members.length?'Anggota tidak ditemukan':'Belum ada anggota terdaftar';
       $('#empty-description').textContent=members.length?'Coba kata kunci lain atau ubah filter jenis keanggotaan.':'Tambahkan anggota pertama atau muat data contoh untuk mencoba pengelolaan.';
-      $('#result-count').textContent=`${filtered.length?((currentPage-1)*pageSize+1):0}–${Math.min(currentPage*pageSize,filtered.length)} dari ${filtered.length} anggota${query||type?' (hasil filter)':''}`;
+      $('#result-count').textContent=`${filtered.length?((currentPage-1)*pageSize+1):0}-${Math.min(currentPage*pageSize,filtered.length)} dari ${filtered.length} anggota${query||type||program?' (hasil filter)':''}`;
       $('#page-controls').innerHTML=`<button class="page-button" data-page="${currentPage-1}" ${currentPage===1?'disabled':''} aria-label="Halaman sebelumnya">‹</button>${Array.from({length:pages},(_,i)=>i+1).filter(p=>Math.abs(p-currentPage)<2||p===1||p===pages).map((p,i,a)=>`${i&&p>a[i-1]+1?'<span aria-hidden="true">…</span>':''}<button class="page-button ${p===currentPage?'active':''}" data-page="${p}" ${p===currentPage?'aria-current="page"':''} aria-label="Halaman ${p}">${p}</button>`).join('')}<button class="page-button" data-page="${currentPage+1}" ${currentPage===pages?'disabled':''} aria-label="Halaman berikutnya">›</button>`;
       $('#demo-button').hidden=members.some(m=>m.isDemo);
       $('#demo-banner').hidden=!members.some(m=>m.isDemo);
     }
-    ['#member-search','#type-filter','#sort-filter'].forEach(sel=>$(sel).addEventListener(sel==='#member-search'?'input':'change',()=>{currentPage=1;render();}));
+    ['#member-search','#type-filter','#program-filter','#sort-filter'].forEach(sel=>$(sel).addEventListener(sel==='#member-search'?'input':'change',()=>{currentPage=1;render();}));
     $('#page-controls').addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b&&!b.disabled){currentPage=Number(b.dataset.page);render();}});
     $('#table-body').addEventListener('click',e=> {
       const button=e.target.closest('[data-action]');if(!button)return;
