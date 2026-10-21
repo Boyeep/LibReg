@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membuat Website LibReg dengan Bootstrap dan JavaScript</title>
+</head>
+<body style="margin:0;background:#fff">
+<article lang="id" style="font-family:Arial,sans-serif;font-size:16px;line-height:1.8;color:#333;max-width:880px;margin:28px auto;padding:0 20px;overflow-wrap:anywhere">
+  <p style="color:#666;font-size:14px;margin-bottom:5px">Catatan Proyek Pemrograman Web</p>
+  <h1 style="font-size:28px;line-height:1.4;margin:0 0 20px">Membuat Website Pendaftaran Anggota Perpustakaan: LibReg</h1>
+  <p>Pada tugas kali ini, saya membuat website bernama <strong>LibReg</strong>. Website ini digunakan untuk pendaftaran anggota perpustakaan dan latihan mengelola data anggota. Teknologi yang dipakai adalah HTML, Bootstrap, CSS, serta JavaScript.</p>
+  <p>Kasus yang diberikan adalah perpustakaan kampus yang masih menerima pendaftaran dengan formulir kertas. Dari kasus tersebut, saya membuat form online dan halaman petugas agar data anggota dapat ditambahkan, dicari, diperbarui, dan dihapus.</p>
+
+  <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">Menentukan Halaman yang Dibutuhkan</h2>
+  <p>Saya membagi website menjadi enam halaman: Beranda, Tentang Perpustakaan, Layanan, Pendaftaran Anggota, Daftar Anggota, dan Login Petugas. Pembagian ini membuat isi setiap file lebih jelas. Form pendaftaran tidak dicampur dengan tabel pengelolaan anggota.</p>
+  <pre style="padding:16px;background:#f5f5f5;border:1px solid #ddd;overflow-x:auto;font-size:14px;line-height:1.7">LibReg/
+├── index.html
+├── tentang.html
+├── layanan.html
+├── pendaftaran.html
+├── anggota.html
+├── login.html
+├── assets/
+│   ├── style.css
+│   ├── app.js
+│   ├── favicon.svg
+│   ├── images/library.jpg
+│   └── vendor/
+│       ├── bootstrap.min.css
+│       └── bootstrap.bundle.min.js
+├── screenshots/
+├── tests/
+└── README.md</pre>
+  <p>File <code>style.css</code> berisi gaya tambahan, sementara <code>app.js</code> menangani navigasi bersama, validasi, penyimpanan, dan pengelolaan data. Bootstrap disimpan di folder <code>vendor</code> supaya website tetap bisa digunakan tanpa mengambil file dari CDN.</p>
+
+  <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">Membuat Tampilan Beranda</h2>
+  <p>Untuk tampilan, saya memakai navbar putih dengan identitas biru dan latar halaman yang terang. Hero berisi judul, penjelasan singkat, dua tombol, serta foto rak buku dalam panel biru muda. Kartu layanan dilengkapi ikon, sedangkan statistik dan fasilitas disusun agar mudah dibaca.</p>
+  <p>Susunan kolom menggunakan grid Bootstrap. Contohnya, teks hero berada di tujuh kolom dan foto berada di lima kolom pada layar sedang ke atas. Ketika dibuka di ponsel, keduanya tersusun ke bawah.</p>
+  <pre style="padding:16px;background:#f5f5f5;border:1px solid #ddd;overflow-x:auto;font-size:14px;line-height:1.7"><code>&lt;div class="row align-items-center g-4"&gt;
+  &lt;div class="col-md-7"&gt;
+    &lt;h1&gt;Selamat Datang di Perpustakaan Universitas&lt;/h1&gt;
+    &lt;p&gt;Informasi singkat tentang perpustakaan.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="col-md-5"&gt;
+    &lt;img src="assets/images/library.jpg"
+         class="hero-image" alt="Rak buku perpustakaan"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  <figure style="margin:24px 0">
+    <img src="../screenshots/beranda-viewport.png" alt="Tampilan beranda LibReg dengan navbar putih dan empat kartu layanan" style="width:100%;height:auto;border:1px solid #ccc" loading="lazy" width="1440" height="1000">
+    <figcaption style="font-size:14px;color:#666;margin-top:8px">Beranda LibReg dengan hero biru muda, kartu layanan berikon, dan navigasi yang terstruktur.</figcaption>
+  </figure>
+
+  <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">Form Pendaftaran Anggota</h2>
+  <p>Form pendaftaran berisi tujuh data utama: nama lengkap, NIM/NIP, program studi atau unit kerja, jenis keanggotaan, nomor telepon, email, dan alamat. Pilihan jenis keanggotaan terdiri dari mahasiswa, dosen, dan tenaga kependidikan.</p>
+  <p>Pada desktop, beberapa kolom disusun berdampingan. Pada ponsel, semua kolom ditampilkan dalam satu kolom. Tombol Reset digunakan untuk mengosongkan isian dan tombol Daftar Sekarang untuk memproses data.</p>
+  <figure style="margin:24px 0">
+    <img src="../screenshots/pendaftaran-desktop.png" alt="Form pendaftaran anggota LibReg dengan data identitas dan tombol Reset serta Daftar" style="width:100%;height:auto;border:1px solid #ccc" loading="lazy" width="1440" height="1185">
+    <figcaption style="font-size:14px;color:#666;margin-top:8px">Form pendaftaran anggota pada layar desktop.</figcaption>
+  </figure>
+
+  <h3 style="font-size:19px;margin:20px 0 10px">Validasi Sebelum Menyimpan</h3>
+  <p>JavaScript memeriksa apakah kolom wajib sudah diisi. Email harus memiliki format yang benar, nomor telepon harus sesuai, dan NIM/NIP tidak boleh sama dengan anggota yang sudah terdaftar.</p>
+  <p>Nomor induk dibandingkan setelah spasi dihapus dan huruf diubah menjadi kapital. Dengan cara ini, nomor yang ditulis menggunakan spasi tidak dianggap sebagai nomor baru. Jika ada kesalahan, kolom diberi class Bootstrap <code>is-invalid</code> dan penjelasan ditampilkan di dekat kolomnya.</p>
+  <p>Setelah penyimpanan berhasil, halaman menampilkan pesan sukses dan kartu anggota simulasi. Kartu tersebut dapat dicetak melalui dialog cetak browser.</p>
+
+  <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">Menyimpan Data dengan localStorage</h2>
+  <p>Karena tugas ini belum menggunakan backend, data anggota disimpan di localStorage. Data awalnya berbentuk array JavaScript, lalu diubah menjadi teks JSON dengan <code>JSON.stringify()</code> sebelum disimpan. Saat dibaca kembali, teks JSON diubah menjadi array menggunakan <code>JSON.parse()</code>.</p>
+  <p>Berikut gambaran cara penyimpanannya:</p>
+  <pre style="padding:16px;background:#f5f5f5;border:1px solid #ddd;overflow-x:auto;font-size:14px;line-height:1.7"><code>// Contoh dasar menyimpan dan membaca daftar anggota.
+localStorage.setItem(
+  "libraryreg.members.v1",
+  JSON.stringify(daftarAnggota)
+);
+
+const dataTersimpan = localStorage.getItem("libraryreg.members.v1");
+const daftarAnggotaBaru = dataTersimpan
+  ? JSON.parse(dataTersimpan)
+  : [];</code></pre>
+  <p>localStorage membantu menjaga data setelah halaman dimuat ulang. Namun, datanya hanya tersedia pada browser dan alamat situs yang sama. Data yang dibuat di satu komputer tidak otomatis muncul di komputer lain.</p>
+
+  <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">Halaman Petugas dan Pengelolaan Anggota</h2>
+  <p>Halaman Daftar Anggota menampilkan tabel berisi nama, NIM/NIP, program studi atau unit kerja, jenis anggota, dan tanggal pendaftaran. Di atas tabel terdapat pencarian dan pilihan filter. Setiap baris memiliki tiga tombol: Detail, Edit, dan Hapus.</p>
+  <ul style="padding-left:24px">
+    <li><strong>Detail</strong> membuka informasi lengkap anggota.</li>
+    <li><strong>Edit</strong> membuka form yang sudah berisi data anggota untuk diperbarui.</li>
+    <li><strong>Hapus</strong> menampilkan konfirmasi sebelum data dihapus.</li>
+  </ul>
+  <p>Detail, edit, dan konfirmasi hapus menggunakan modal Bootstrap. Setelah perubahan berhasil disimpan, daftar dan jumlah anggota ikut diperbarui. Notifikasi dipakai untuk memberi tahu hasil tindakan kepada pengguna.</p>
+  <figure style="margin:24px 0">
+    <img src="../screenshots/anggota-desktop.png" alt="Tabel data anggota LibReg dengan pencarian, filter, serta tombol Detail, Edit, dan Hapus" style="width:100%;height:auto;border:1px solid #ccc" loading="lazy" width="1440" height="1417">
+    <figcaption style="font-size:14px;color:#666;margin-top:8px">Contoh tabel anggota. Nama dan nomor pada gambar adalah data fiktif.</figcaption>
+  </figure>
+
+  <h3 style="font-size:19px;margin:20px 0 10px">Login Masih Berupa Simulasi</h3>
+  <p>Untuk mencoba halaman petugas, saya menyediakan email <code>petugas@libreg.demo</code> dan password <code>library123</code>. Penanda sesi disimpan di sessionStorage. Login ini digunakan untuk latihan alur antarmuka dan belum menjadi sistem keamanan yang sesungguhnya.</p>
+
+  <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">Mencoba Website</h2>
+  <p>Website dapat dibuka dari file <code>index.html</code>. Saya juga menyiapkan cara menjalankannya menggunakan server lokal Python:</p>
+  <pre style="padding:16px;background:#f5f5f5;border:1px solid #ddd;overflow-x:auto;font-size:14px"><code>cd LibReg
+python -m http.server 4173</code></pre>
+  <p>Setelah server aktif, buka <code>http://localhost:4173</code>. Tombol Muat data contoh pada halaman anggota dapat digunakan untuk mencoba pencarian, filter, edit, dan hapus tanpa mengetik banyak anggota terlebih dahulu.</p>
+  <p>Bagian yang diperiksa mencakup form kosong, email salah, NIM/NIP duplikat, penyimpanan setelah reload, pencarian, edit, batal hapus, serta konfirmasi hapus. Tampilan juga diperiksa pada ukuran desktop dan ponsel.</p>
+  <p>Proyek dapat diakses melalui <a href="https://libreg.boysteven.com" style="color:#1756a0">libreg.boysteven.com</a>. Kode sumbernya tersedia di <a href="https://github.com/Boyeep/LibReg" style="color:#1756a0">repositori Boyeep/LibReg</a>. Server lokal tetap dapat digunakan untuk mencoba perubahan sebelum memperbarui situs. Jika dikembangkan lebih lanjut, aplikasi dapat ditambah backend dan database agar data bisa digunakan bersama oleh petugas di beberapa perangkat.</p>
+
+  <h2 style="font-size:23px;color:#1756a0;margin:30px 0 12px">Yang Dipelajari dari Tugas Ini</h2>
+  <p>Melalui LibReg, saya mempraktikkan penggunaan komponen Bootstrap, pembuatan form, validasi dengan JavaScript, dan penyimpanan data sederhana. Bagian pentingnya adalah menghubungkan setiap tindakan pada antarmuka dengan perubahan data: menambah melalui form, membaca di tabel, mengedit melalui modal, lalu menghapus setelah konfirmasi.</p>
+
+  <p style="border-top:1px solid #ccc;padding-top:18px;margin-top:30px"><a href="https://libreg.boysteven.com" style="color:#1756a0">Buka website LibReg</a> · <a href="https://github.com/Boyeep/LibReg" style="color:#1756a0">Source code GitHub</a> · <a href="jawaban-libreg.html" style="color:#1756a0">Lihat jawaban soal 1–4</a></p>
+</article>
+</body>
+</html>

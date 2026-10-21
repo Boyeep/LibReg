@@ -1,11 +1,10 @@
 {
-  "name": "libraryreg",
+  "name": "libreg",
   "version": "1.0.0",
   "private": true,
   "description": "Aplikasi pendaftaran anggota perpustakaan berbasis Bootstrap dan localStorage",
   "scripts": {
-    "start": "python -m http.server 4173",
-    "test": "node tests/smoke.cjs"
+    "start": "python -m http.server 4173"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1"

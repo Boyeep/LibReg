@@ -26,13 +26,13 @@
   };
   const icon = name => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${paths[name] || paths.book}"/></svg>`;
   const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const brand = `${icon('book')} <span>LibraryReg</span>`;
+  const brand = `<span class="brand-icon">${icon('book')}</span><span>LibReg<small>Perpustakaan Universitas</small></span>`;
   const page = document.body.dataset.page;
   const navItems = [['index.html','Beranda','home'],['tentang.html','Tentang','about'],['layanan.html','Layanan','services'],['anggota.html','Daftar Anggota','members'],['pendaftaran.html','Pendaftaran','register']];
   const nav = $('#site-header');
-  if (nav) nav.innerHTML = `<nav class="navbar navbar-expand-lg navbar-dark bg-primary" aria-label="Navigasi utama"><div class="container"><a class="navbar-brand d-flex align-items-center gap-2" href="index.html" aria-label="LibraryReg, beranda">${brand}</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Buka menu navigasi"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="main-nav"><ul class="navbar-nav ms-auto">${navItems.map(([url,label,key])=>`<li class="nav-item"><a class="nav-link ${page===key?'active':''}" ${page===key?'aria-current="page"':''} href="${url}">${label}</a></li>`).join('')}</ul>${page==='members'?'<button class="btn btn-light btn-sm ms-lg-3" id="logout">Keluar</button>':'<a href="login.html" class="btn btn-light btn-sm ms-lg-3">Login Petugas</a>'}</div></div></nav>`;
+  if (nav) nav.innerHTML = `<nav class="navbar navbar-expand-lg site-navbar" aria-label="Navigasi utama"><div class="container"><a class="navbar-brand d-flex align-items-center gap-2" href="index.html" aria-label="LibReg, beranda">${brand}</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Buka menu navigasi"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="main-nav"><ul class="navbar-nav ms-auto">${navItems.map(([url,label,key])=>`<li class="nav-item"><a class="nav-link ${page===key?'active':''}" ${page===key?'aria-current="page"':''} href="${url}">${label}</a></li>`).join('')}</ul>${page==='members'?'<button class="btn btn-outline-primary btn-sm ms-lg-3" id="logout">Keluar</button>':'<a href="login.html" class="btn btn-outline-primary btn-sm ms-lg-3">Login Petugas</a>'}</div></div></nav>`;
   const footer = $('#site-footer');
-  if (footer) footer.innerHTML = `<footer class="site-footer"><div class="container"><div class="row g-3"><div class="col-md-4"><h2 class="h6">LibraryReg</h2><p>Aplikasi Pendaftaran Anggota Perpustakaan.<br>Tugas Pemrograman Web.</p></div><div class="col-md-4"><h2 class="h6">Kontak</h2><p>Gedung Perpustakaan, Kampus Utama<br>perpustakaan@universitas.example<br>(021) 555 0123</p></div><div class="col-md-4"><h2 class="h6">Jam layanan</h2><p>Senin–Jumat: 08.00–16.00 WIB<br>Sabtu, Minggu, dan hari libur: tutup.</p></div></div><div class="footer-note">© ${new Date().getFullYear()} LibraryReg. Profil dan kontak merupakan contoh untuk tugas.</div></div></footer>`;
+  if (footer) footer.innerHTML = `<footer class="site-footer"><div class="container"><div class="row g-3"><div class="col-md-4"><h2 class="h5 footer-brand">LibReg</h2><p>Pendaftaran anggota perpustakaan yang lebih mudah.<br>Proyek Pemrograman Web.</p></div><div class="col-md-4"><h2 class="h6">Kontak</h2><p>Gedung Perpustakaan, Kampus Utama<br>perpustakaan@universitas.example<br>(021) 555 0123</p></div><div class="col-md-4"><h2 class="h6">Jam layanan</h2><p>Senin–Jumat: 08.00–16.00 WIB<br>Sabtu, Minggu, dan hari libur: tutup.</p></div></div><div class="footer-note">© ${new Date().getFullYear()} LibReg. Profil dan kontak merupakan contoh untuk tugas.</div></div></footer>`;
   $$('[data-icon]').forEach(el => el.innerHTML = icon(el.dataset.icon));
   const toastHost = document.createElement('div');
   toastHost.className = 'toast-container position-fixed bottom-0 end-0 p-3';
@@ -49,6 +49,7 @@
     toast.addEventListener('hidden.bs.toast',()=>{instance.dispose();toast.remove();});
     instance.show();
   }
+  // Key lama dipertahankan supaya data anggota yang sudah ada tetap terbaca.
   const STORE_KEY = 'libraryreg.members.v1';
   const SESSION_KEY = 'libraryreg.staff.demo';
   const TYPES = ['Mahasiswa','Dosen','Tenaga Kependidikan'];
@@ -118,7 +119,7 @@
     return Object.fromEntries(['name','number','program','address','phone','email','type'].map(k=>[k,k==='number'?normalizeNumber(data[k]):String(data[k]||'').trim()]));
   }
   function cardMarkup(m) {
-    return `<div class="member-card"><div class="card-brand"><span>${icon('book')} LibraryReg.</span><span>KARTU ANGGOTA DEMO</span></div><div class="card-name wrap-anywhere">${escape(m.name)}</div><div class="card-id">${escape(m.number)} · ${escape(m.type)}</div><div class="card-bottom"><span>${escape(memberNumber(m))}</span><span>${escape(m.program)}</span></div></div>`;
+    return `<div class="member-card"><div class="card-brand"><span>${icon('book')} LibReg.</span><span>KARTU ANGGOTA DEMO</span></div><div class="card-name wrap-anywhere">${escape(m.name)}</div><div class="card-id">${escape(m.number)} · ${escape(m.type)}</div><div class="card-bottom"><span>${escape(memberNumber(m))}</span><span>${escape(m.program)}</span></div></div>`;
   }
   function printCard(m) {
     $('#print-area')?.remove();
@@ -155,7 +156,7 @@
     form.addEventListener('submit',event=> {
       event.preventDefault();
       const email = $('#login-email'), password = $('#password');
-      const validEmail = fieldError(email,email.value.trim().toLowerCase() === 'petugas@libraryreg.demo'?'':'Gunakan email demo petugas@libraryreg.demo.');
+      const validEmail = fieldError(email,email.value.trim().toLowerCase() === 'petugas@libreg.demo'?'':'Gunakan email demo petugas@libreg.demo.');
       const validPassword = fieldError(password,password.value === 'library123'?'':'Gunakan password demo library123.');
       if (!validEmail || !validPassword) { $('.is-invalid',form)?.focus(); return; }
       try { sessionStorage.setItem(SESSION_KEY,'active'); window.location.href='anggota.html'; }

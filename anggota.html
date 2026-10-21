@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="LibraryReg, aplikasi pendaftaran anggota perpustakaan untuk tugas Pemrograman Web.">
-  <title>Data Anggota - LibraryReg</title>
+  <meta name="description" content="LibReg, aplikasi pendaftaran anggota perpustakaan untuk tugas Pemrograman Web.">
+  <title>Data Anggota - LibReg</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
   <link rel="stylesheet" href="assets/style.css">
@@ -16,17 +16,17 @@
   <header id="site-header"></header>
   <main id="main-content" class="container">
     <nav aria-label="Breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="index.html">Beranda</a></li><li class="breadcrumb-item active" aria-current="page">Data Anggota</li></ol></nav>
-    <div class="member-heading"><div><h1 class="page-title">Data Anggota</h1><p class="mb-0 text-muted">Daftar anggota yang tersimpan di browser ini.</p></div><a class="btn btn-primary" href="pendaftaran.html">Tambah Anggota</a></div>
-    <div class="member-counts"><span>Total: <strong id="stat-total">0</strong></span><span>Mahasiswa: <strong id="stat-student">0</strong></span><span>Dosen: <strong id="stat-lecturer">0</strong></span><span>Tenaga kependidikan: <strong id="stat-staff">0</strong></span></div>
+    <div class="member-heading"><div><p class="section-label">PENGELOLAAN PERPUSTAKAAN</p><h1 class="page-title">Data Anggota</h1><p class="mb-0 text-muted">Daftar anggota yang tersimpan di browser ini.</p></div><a class="btn btn-primary" href="pendaftaran.html"><span data-icon="plus"></span> Tambah Anggota</a></div>
+    <div class="member-counts"><div class="member-stat"><span class="stat-icon" data-icon="users"></span><div><span>Total</span><strong id="stat-total">0</strong></div></div><div class="member-stat"><span class="stat-icon" data-icon="cap"></span><div><span>Mahasiswa</span><strong id="stat-student">0</strong></div></div><div class="member-stat"><span class="stat-icon" data-icon="user"></span><div><span>Dosen</span><strong id="stat-lecturer">0</strong></div></div><div class="member-stat"><span class="stat-icon" data-icon="briefcase"></span><div><span>Tenaga kependidikan</span><strong id="stat-staff">0</strong></div></div></div>
     <div class="alert alert-danger" id="storage-error" role="alert" hidden></div>
     <div class="alert alert-info py-2 small" id="demo-banner" hidden>Daftar ini memuat data contoh fiktif. Data contoh dapat diedit atau dihapus untuk latihan.</div>
-    <section class="card" aria-label="Daftar anggota">
+    <section class="card table-card" aria-label="Daftar anggota"><div class="table-title"><h2>Daftar anggota perpustakaan</h2><p>Temukan dan perbarui informasi anggota.</p></div>
       <div class="table-toolbar">
         <div class="search-field"><label class="visually-hidden" for="member-search">Cari nama atau NIM/NIP</label><input class="form-control" type="search" id="member-search" placeholder="Cari nama atau NIM/NIP..."></div>
         <label class="visually-hidden" for="type-filter">Jenis keanggotaan</label><select class="form-select" id="type-filter"><option value="">Semua jenis</option><option>Mahasiswa</option><option>Dosen</option><option>Tenaga Kependidikan</option></select>
         <label class="visually-hidden" for="sort-filter">Urutan anggota</label><select class="form-select" id="sort-filter"><option value="newest">Terbaru</option><option value="name">Nama A–Z</option></select>
       </div>
-      <div class="table-responsive" tabindex="0" role="region" aria-label="Tabel anggota, geser ke samping pada layar kecil"><table class="table table-bordered table-hover member-table"><caption class="visually-hidden">Data anggota perpustakaan</caption><thead><tr><th scope="col">Nama</th><th scope="col">NIM / NIP</th><th scope="col">Program studi / unit</th><th scope="col">Jenis anggota</th><th scope="col">Tanggal daftar</th><th scope="col">Tindakan</th></tr></thead><tbody id="table-body"></tbody></table></div>
+      <div class="table-responsive" tabindex="0" role="region" aria-label="Tabel anggota, geser ke samping pada layar kecil"><table class="table table-hover member-table"><caption class="visually-hidden">Data anggota perpustakaan</caption><thead><tr><th scope="col">Nama</th><th scope="col">NIM / NIP</th><th scope="col">Program studi / unit</th><th scope="col">Jenis anggota</th><th scope="col">Tanggal daftar</th><th scope="col">Tindakan</th></tr></thead><tbody id="table-body"></tbody></table></div>
       <div class="empty-state" id="empty-state"><h2 class="h5" id="empty-title">Belum ada anggota</h2><p id="empty-description">Tambahkan anggota untuk mulai mencoba.</p></div>
       <div class="pagination-bar"><span id="result-count" role="status" aria-live="polite"></span><nav class="pagination-controls" id="page-controls" aria-label="Halaman daftar anggota"></nav></div>
     </section>

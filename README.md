@@ -1,60 +1,66 @@
-# LibraryReg
+# LibReg
 
-Aplikasi pendaftaran anggota perpustakaan untuk tugas Pemrograman Web. Dibuat dengan HTML, Bootstrap 5, CSS, JavaScript, dan localStorage.
+Aplikasi pendaftaran anggota perpustakaan untuk tugas Pemrograman Web, menggunakan HTML, Bootstrap 5, CSS, JavaScript, dan localStorage.
 
-Versi ini **dikerjakan secara lokal dan tidak dipublikasikan**. Tampilan memakai komponen Bootstrap sederhana dengan navbar biru, form dua kolom pada desktop, dan tabel anggota.
+- Website: [https://libreg.boysteven.com](https://libreg.boysteven.com)
+- Repository: [Boyeep/LibReg](https://github.com/Boyeep/LibReg)
+- [Jawaban tugas](docs/jawaban-libreg.html)
+- [Blog proyek](docs/blog-libreg.html)
 
-## Membuka website
+## Tampilan dan fitur
 
-Buka `index.html` di browser. Untuk penyimpanan antarhalaman yang lebih konsisten, jalankan server lokal:
+LibReg memakai navbar putih dengan identitas biru, hero dengan foto perpustakaan, kartu layanan berikon, serta form dan tabel yang responsif. Menu utama terdiri dari Beranda, Tentang, Layanan, Daftar Anggota, Pendaftaran, dan Login Petugas.
+
+Form memeriksa kolom wajib, email, nomor telepon, dan keunikan NIM/NIP. Petugas dapat mencari anggota, membuka detail, mengedit, serta menghapus data dengan konfirmasi. Tersedia filter, urutan, paginasi, data contoh fiktif, dan kartu anggota simulasi yang dapat dicetak.
+
+## Menjalankan di komputer
+
+Buka `index.html`, atau jalankan server lokal dari folder repo:
 
 ```powershell
-cd PWEB-LibraryReg
+git clone https://github.com/Boyeep/LibReg.git
+cd LibReg
 python -m http.server 4173
 ```
 
-Kemudian buka http://localhost:4173. Tidak perlu build atau CDN. Bootstrap, gambar, dan ikon sudah tersedia di folder `assets/`.
+Buka http://localhost:4173. Tidak ada proses build. Bootstrap, gambar, dan ikon tersedia lokal.
 
-## Akun petugas simulasi
+## Akun demo petugas
 
-- Email: `petugas@libraryreg.demo`
+- Email: `petugas@libreg.demo`
 - Password: `library123`
 
-Login ini hanya simulasi tampilan, belum menggunakan autentikasi server.
+Login hanya simulasi antarmuka, tanpa autentikasi server.
 
-## Halaman dan fitur
+## Halaman
 
-| Halaman | Isi |
+| Berkas | Isi |
 |---|---|
 | `index.html` | Beranda, layanan, statistik contoh, fasilitas, dan kontak |
-| `tentang.html` | Profil singkat, visi, dan misi |
-| `layanan.html` | Informasi layanan dan jam buka |
-| `pendaftaran.html` | Form anggota, validasi, dan hasil pendaftaran |
+| `tentang.html` | Profil, visi, dan misi |
+| `layanan.html` | Layanan dan jam buka |
+| `pendaftaran.html` | Form pendaftaran dan hasil penyimpanan |
 | `login.html` | Login petugas simulasi |
-| `anggota.html` | Tabel, pencarian, filter, detail, edit, dan hapus anggota |
+| `anggota.html` | Pencarian, detail, edit, dan hapus anggota |
+| `docs/jawaban-libreg.html` | Jawaban soal 1 sampai 4 |
+| `docs/blog-libreg.html` | Artikel penjelasan pembuatan proyek |
 
-NIM/NIP harus unik. Data disimpan di localStorage dengan key `libraryreg.members.v1`, sedangkan sesi demo menggunakan sessionStorage. Data tetap ada setelah reload pada alamat/browser yang sama. Data tidak dibagikan ke perangkat lain dan bisa hilang jika data situs dihapus.
+## Penyimpanan data
 
-Tombol **Muat data contoh** menyediakan data fiktif untuk mencoba tabel. Cetak kartu anggota tersedia setelah pendaftaran atau pada detail anggota.
+Data berada pada localStorage browser, bukan database server. Data hanya tersedia pada browser dan alamat situs yang sama. Penyimpanan localhost terpisah dari domain produksi. Menghapus data situs akan menghapus data anggota.
 
-## Dua artikel HTML
+Key `libraryreg.members.v1` dan `libraryreg.staff.demo` dipertahankan dari versi awal untuk menjaga data dan sesi yang sudah ada. Nama aplikasi pada antarmuka adalah LibReg.
 
-Berkas berikut berada di folder induk proyek, mengikuti penomoran blog sebelumnya:
+## Dokumentasi
 
-1. [Jawaban tugas LibraryReg](../blog-7-jawaban-libraryreg.html): jawaban soal 1–4, ruang lingkup, rancangan halaman/menu, dan desain.
-2. [Blog proyek LibraryReg](../blog-8-project-libraryreg.html): penjelasan pembuatan website, struktur berkas, formulir, dan localStorage.
+Dua artikel HTML disimpan pada folder `docs/` agar ikut tersedia di repo. Screenshot pada folder `screenshots/` mengikuti tampilan terbaru. Salinan artikel untuk folder tugas juga tersedia di folder induk proyek.
 
-Artikel menggunakan gambar dari `screenshots/`. Jika dipindahkan ke platform blog, unggah gambar terlebih dahulu lalu sesuaikan alamat `src`.
+Perubahan pada checkout lokal belum memperbarui domain sampai dikirim ke repo dan diproses oleh hosting yang sudah terhubung. Proyek ini tidak memakai hosting Sites.
 
-```powershell
-npm ci
-# Jalankan server lokal di terminal lain terlebih dahulu.
-```
+## Aset
 
-## Sumber aset
+- Bootstrap lokal dengan lisensi MIT pada `assets/vendor/`.
+- Foto rak buku dari [Unsplash](https://images.unsplash.com/photo-1507842217343-583bb7270b66), disimpan pada `assets/images/library.jpg`.
+- Logo dan ikon SVG di dalam kode.
 
-- Bootstrap lokal pada `assets/vendor/`, dengan lisensi MIT yang disertakan.
-- Foto rak buku dari [Unsplash](https://images.unsplash.com/photo-1507842217343-583bb7270b66), tersimpan pada `assets/images/library.jpg`.
-- Ikon dan logo menggunakan SVG di dalam proyek.
-
-Profil, kontak, jam layanan, statistik, serta data contoh adalah ilustrasi tugas.
+Profil, kontak, jam layanan, statistik, dan data contoh merupakan ilustrasi tugas.

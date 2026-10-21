@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="LibraryReg, aplikasi pendaftaran anggota perpustakaan untuk tugas Pemrograman Web.">
-  <title>Pendaftaran Anggota - LibraryReg</title>
+  <meta name="description" content="LibReg, aplikasi pendaftaran anggota perpustakaan untuk tugas Pemrograman Web.">
+  <title>Pendaftaran Anggota - LibReg</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
   <link rel="stylesheet" href="assets/style.css">
@@ -19,7 +19,7 @@
     <div class="form-wrap">
       <div class="card"><div class="card-body">
         <div id="registration-content">
-          <h1 class="page-title">Formulir Pendaftaran Anggota</h1>
+          <div class="form-header"><span class="page-icon" data-icon="user"></span><div><p class="section-label">KEANGGOTAAN PERPUSTAKAAN</p><h1 class="page-title">Formulir Pendaftaran Anggota</h1></div></div>
           <p class="page-description">Lengkapi data berikut. Kolom bertanda <span class="required">*</span> wajib diisi.</p>
           <form id="registration-form" novalidate>
             <div class="field-grid">
@@ -31,7 +31,7 @@
           <div class=""><label class="form-label" for="email">Email <span class="required" aria-hidden="true">*</span></label><input class="form-control" id="email" name="email" data-validate required aria-describedby="email-error" type="email" placeholder="nama@kampus.ac.id" autocomplete="email" maxlength="120"><div class="invalid-feedback" id="email-error"></div></div>
           <div class="full-width"><label class="form-label" for="address">Alamat lengkap <span class="required" aria-hidden="true">*</span></label><textarea class="form-control" id="address" name="address" data-validate required aria-describedby="address-error" placeholder="Jalan, nomor rumah, dan kota" autocomplete="street-address" maxlength="300" rows="3"></textarea><div class="invalid-feedback" id="address-error"></div></div>
             </div>
-            <p class="small text-muted mt-3 mb-0">NIM/NIP hanya boleh didaftarkan satu kali. Data disimpan di browser yang digunakan.</p>
+            <p class="form-info"><span data-icon="info"></span> NIM/NIP hanya boleh didaftarkan satu kali. Data tersimpan di browser yang Anda gunakan.</p>
             <div class="form-actions"><button class="btn btn-outline-secondary" type="reset">Reset</button><button class="btn btn-primary" type="submit">Daftar Sekarang</button></div>
           </form>
         </div>
