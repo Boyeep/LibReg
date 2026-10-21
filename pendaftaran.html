@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LibraryReg, aplikasi pendaftaran anggota perpustakaan untuk tugas Pemrograman Web.">
+  <title>Pendaftaran Anggota - LibraryReg</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/vendor/bootstrap.bundle.min.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body data-page="register">
+  <a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+  <header id="site-header"></header>
+  <main id="main-content" class="container">
+    <nav aria-label="Breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="index.html">Beranda</a></li><li class="breadcrumb-item active" aria-current="page">Pendaftaran Anggota</li></ol></nav>
+    <div class="form-wrap">
+      <div class="card"><div class="card-body">
+        <div id="registration-content">
+          <h1 class="page-title">Formulir Pendaftaran Anggota</h1>
+          <p class="page-description">Lengkapi data berikut. Kolom bertanda <span class="required">*</span> wajib diisi.</p>
+          <form id="registration-form" novalidate>
+            <div class="field-grid">
+          <div class=""><label class="form-label" for="name">Nama lengkap <span class="required" aria-hidden="true">*</span></label><input class="form-control" id="name" name="name" data-validate required aria-describedby="name-error" type="text" placeholder="Nama lengkap" autocomplete="name" maxlength="80"><div class="invalid-feedback" id="name-error"></div></div>
+          <div class=""><label class="form-label" for="number">NIM / NIP <span class="required" aria-hidden="true">*</span></label><input class="form-control" id="number" name="number" data-validate required aria-describedby="number-error" type="text" placeholder="Nomor induk" autocomplete="off" maxlength="30"><div class="invalid-feedback" id="number-error"></div></div>
+          <div class=""><label class="form-label" for="program">Program studi / unit kerja <span class="required" aria-hidden="true">*</span></label><input class="form-control" id="program" name="program" data-validate required aria-describedby="program-error" type="text" placeholder="Contoh: Teknik Informatika" autocomplete="organization" maxlength="80"><div class="invalid-feedback" id="program-error"></div></div>
+          <div class=""><label class="form-label" for="type">Jenis keanggotaan <span class="required" aria-hidden="true">*</span></label><select class="form-select" id="type" name="type" data-validate required aria-describedby="type-error"><option value="">Pilih jenis keanggotaan</option><option>Mahasiswa</option><option>Dosen</option><option>Tenaga Kependidikan</option></select><div class="invalid-feedback" id="type-error"></div></div>
+          <div class=""><label class="form-label" for="phone">Nomor telepon <span class="required" aria-hidden="true">*</span></label><input class="form-control" id="phone" name="phone" data-validate required aria-describedby="phone-error" type="tel" placeholder="081234567890" autocomplete="tel" maxlength="20"><div class="invalid-feedback" id="phone-error"></div></div>
+          <div class=""><label class="form-label" for="email">Email <span class="required" aria-hidden="true">*</span></label><input class="form-control" id="email" name="email" data-validate required aria-describedby="email-error" type="email" placeholder="nama@kampus.ac.id" autocomplete="email" maxlength="120"><div class="invalid-feedback" id="email-error"></div></div>
+          <div class="full-width"><label class="form-label" for="address">Alamat lengkap <span class="required" aria-hidden="true">*</span></label><textarea class="form-control" id="address" name="address" data-validate required aria-describedby="address-error" placeholder="Jalan, nomor rumah, dan kota" autocomplete="street-address" maxlength="300" rows="3"></textarea><div class="invalid-feedback" id="address-error"></div></div>
+            </div>
+            <p class="small text-muted mt-3 mb-0">NIM/NIP hanya boleh didaftarkan satu kali. Data disimpan di browser yang digunakan.</p>
+            <div class="form-actions"><button class="btn btn-outline-secondary" type="reset">Reset</button><button class="btn btn-primary" type="submit">Daftar Sekarang</button></div>
+          </form>
+        </div>
+        <div id="registration-success" hidden></div>
+      </div></div>
+    </div>
+  </main>
+  <div id="site-footer"></div>
+  <noscript><div class="alert alert-warning m-3">Aktifkan JavaScript untuk menggunakan formulir dan data anggota.</div></noscript>
+</body>
+</html>

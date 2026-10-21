@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LibraryReg, aplikasi pendaftaran anggota perpustakaan untuk tugas Pemrograman Web.">
+  <title>Login Petugas - LibraryReg</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/vendor/bootstrap.bundle.min.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body data-page="login">
+  <a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+  <header id="site-header"></header>
+  <main id="main-content" class="container">
+    <nav aria-label="Breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="index.html">Beranda</a></li><li class="breadcrumb-item active" aria-current="page">Login Petugas</li></ol></nav>
+    <div class="login-wrap card"><div class="card-body">
+      <h1 class="page-title">Login Petugas</h1>
+      <p class="text-muted">Masuk untuk mengelola data anggota.</p>
+      <div class="alert alert-info" id="login-context" hidden>Silakan login untuk membuka daftar anggota.</div>
+      <div class="demo-credentials"><strong>Akun untuk mencoba</strong>Email: <b>petugas@libraryreg.demo</b><br>Password: <b>library123</b></div>
+      <form id="login-form" novalidate>
+        <div class="mb-3"><label class="form-label" for="login-email">Email petugas</label><input class="form-control" id="login-email" type="email" autocomplete="username" placeholder="Masukkan email" required aria-describedby="login-email-error"><div class="invalid-feedback" id="login-email-error"></div></div>
+        <div class="mb-4"><label class="form-label" for="password">Password</label><div class="input-password"><input class="form-control" id="password" type="password" autocomplete="current-password" placeholder="Masukkan password" required aria-describedby="password-error"><button class="password-toggle" id="toggle-password" type="button" aria-label="Tampilkan password" aria-pressed="false"><span data-icon="eye"></span></button></div><div class="invalid-feedback d-block" id="password-error"></div></div>
+        <button class="btn btn-primary w-100" type="submit">Masuk</button>
+      </form>
+      <p class="small text-muted mt-3 mb-0">Login ini hanya simulasi antarmuka untuk tugas, belum menggunakan server.</p>
+    </div></div>
+  </main>
+  <div id="site-footer"></div>
+  <noscript><div class="alert alert-warning m-3">Aktifkan JavaScript untuk menggunakan formulir dan data anggota.</div></noscript>
+</body>
+</html>
